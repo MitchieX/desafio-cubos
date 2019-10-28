@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movies in cube</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+</head>
+<body>
+<!-- START PAGE SOURCE -->
+<section>
+<div id="shell">
+  <div class="card-container">
+  <h1>MOVIES IN CUBE</h1>
+
+  <!-- START SEARCH -->
+  <div class="container">
+      <input type="text" placeholder="Busque um filme por nome, ano ou gênero...">
+      
+    </div>
+  <!-- END SEARCH -->
+  <br>
+     
+   <article class="stack__card" id="uno">
+      <figure class="span__30"> <img src="css/images/catalog-1.jpg" alt="Descriptive Text"></figure>
+      <div class="stack__card__content">
+          <a href="#">  <h2 class="stack__card__title">THOR: RAGNAROK</h2></a>
+        <h4>23/10/2019</h4>
+        <p>Thor está aprisionado do outro lado do universo, sem seu martelo, e se vê em uma corrida para voltar até Asgard e imperdir o Ragnarok, a destruição do seu lar e o fim da civilização asgardiana que está nas mãos de uma nova e poderosa ameaça, a terrível Hela. Mas primeiro ele precisa sobreviver a uma batalha de gladiadores que o coloca contra seu ex-aliado e vingador, o incrível Hulk. </p>
+                <div class="car-list-info">
+                    <a href="#" class="rent-btn">Ação</a>
+                    <a href="#" class="rent-btn">Aventura</a>
+                    <a href="#" class="rent-btn">Fantasia</a>
+                </div>
+      </div>
+    </article>
+
+    <article class="stack__card">
+      <figure class="span__30"> <img src="css/images/catalog-2.jpg" alt="Descriptive Text"></figure>
+      <div class="stack__card__content">
+          <a href="#"><h2 class="stack__card__title">Mulher-Maravilha</h2></a>
+        <h4>23/10/2019</h4>
+        <p>Treinada desde cedo para ser uma guerreira imbatível, Diana Prince nunca saiu da paradisíaca ilha em que é reconhecida como princesa das Amazonas. Quando o piloto Steve Trevor se acidenta e cai em uma praia do local, ela descobre que uma guerra sem precedentes está se espalhando pelo mundo e decide deixar seu lar certa de que pode parar o conflito. Lutando para acabar com todas as lutas, Diana percebe o alcance de seus poderes e sua verdadeira missão na Terra. </p>
+        <div class="display-table">
+            <div class="display-table-cell">
+                <div class="car-list-info">
+                    <a href="#" class="rent-btn">Ação</a>
+                    <a href="#" class="rent-btn">Aventura</a>
+                    <a href="#" class="rent-btn">Fantasia</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="stack__card">
+        <figure class="span__30"> <img src="css/images/catalog-3.jpg" alt="Descriptive Text"></figure>
+        <div class="stack__card__content">
+            <a href="#"> <h2 class="stack__card__title">Homem-aranha: De volta ao lar</h2></a>
+          <h4>23/10/2019</h4>
+          <p>Depois de atuar ao lado dos Vingadores, chegou a hora do pequeno Peter Parker voltar para casa e para a sua vida, já não mais tão normal. Lutando diariamente contra pequenos crimes nas redondezas, ele pensa ter encontrado a missão de sua vida quando o terrível vilão Abutre surge amedrontando a cidade. O problema é que a tarefa não será tão fácil como ele imaginava.</p>
+          <div class="display-table"><br>
+              <div class="display-table-cell">
+                  <div class="car-list-info">
+                      <a href="#" class="rent-btn">Ação</a>
+                      <a href="#" class="rent-btn">Aventura</a>
+                      <a href="#" class="rent-btn">Fantasia</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="stack__card">
+          <figure class="span__30"> <img src="css/images/catalog-4.jpg" alt="Descriptive Text"></figure>
+          <div class="stack__card__content">
+            <a href="#"><h2 class="stack__card__title">Homem de Ferro</h2></a>
+            <h4>23/10/2019</h4>
+            <p>Tony Stark é um industrial bilionário e inventor brilhante que realiza testes bélicos no exterior, mas é sequestrado por terroristas que o forçam a construir uma arma devastadora. Em vez disso, ele constrói uma armadura blindada e enfrenta seus sequestradores. Ao voltar para os EUA, Stark aprimora a armadura e a utiliza para combater o crime.</p>
+            <div class="display-table">
+                <div class="display-table-cell">
+                    <div class="car-list-info">
+                        <a href="#" class="rent-btn">Ação</a>
+                        <a href="#" class="rent-btn">Aventura</a>
+                        <a href="#" class="rent-btn">Fantasia</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </article>
+
+         <!-- Page Pagination Start -->
+
+        <!-- Page Pagination End -->
+
+        <h1>Using TheMovieDB.org API v3</h1>
+        <p><img src="https://image.tmdb.org/t/p/w185/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" alt="Jaws"/></p>
+        <div id="output">
+            <!-- output will go here -->
+        </div>
+        
+        <script src="./js/themoviedb.js"></script>
+        <script>
+            let baseURL = 'https://api.themoviedb.org/3/movie/550?api_key=c81db069c5e8c36c0d22464a0867fb0b';
+            let configData = null;
+            let baseImageURL = null;
+            
+            let getConfig = function () {
+                let url = "".concat(baseURL, 'configuration?api_key=', c81db069c5e8c36c0d22464a0867fb0b); 
+                fetch(url)
+                .then((result)=>{
+                    return result.json();
+                })
+                .then((data)=>{
+                    baseImageURL = data.images.secure_base_url;
+                    configData = data.images;
+                    console.log('config:', data);
+                    console.log('config fetched');
+                    runSearch('jaws')
+                })
+                .catch(function(err){
+                    alert(err);
+                });
+            }
+            
+            let runSearch = function (keyword) {
+                let url = ''.concat(baseURL, 'search/movie?api_key=', c81db069c5e8c36c0d22464a0867fb0b, '&query=', keyword);
+                fetch(url)
+                .then(result=>result.json())
+                .then((data)=>{
+                    //process the returned data
+                    document.getElementById('output').innerHTML = JSON.stringify(data, null, 4);
+                    //work with results array...
+                    
+                })
+            }
+            
+            document.addEventListener('DOMContentLoaded', getConfig);
+
+        </script>
+        
+     
+  </div>
+</section>
+  
+<script type="text/javascript" src="js/page.js"></script>
+
+</body>
+</html>
